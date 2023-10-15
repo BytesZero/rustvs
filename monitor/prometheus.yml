@@ -1,0 +1,32 @@
+# my global config
+global:
+  scrape_interval: 15s # 采集被监控段指标的一个周期
+  evaluation_interval: 15s # 告警评估的一个周期
+
+# 告警的配置文件
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# 告警规则配置
+rule_files:
+  # - "first_rules.yml"
+# 被监控端的配置
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]
+  - job_name: "grafana"
+    static_configs:
+      - targets: ["grafana:3000"]
+  - job_name: "app1"
+    static_configs:
+      - targets: ["node_exporter:9100"]
+  - job_name: "app2"
+    static_configs:
+      - targets: ["47.96.135.99:9100"]
